@@ -4,7 +4,7 @@
 #include "TTree.h"
 
 #define NUM 100
-#define NUM_EVENTS 10000
+#define NUM_EVENTS 50000
 
 int main(int argc, char** argv) {
     std::cout << "Hello World" << std::endl;

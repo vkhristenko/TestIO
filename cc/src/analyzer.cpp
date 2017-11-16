@@ -4,12 +4,14 @@
 #include <TTree.h>
 
 #define NUM 100
-#define NUM_EVENTS 10000
+#define NUM_EVENTS 50000
 
 int main(int argc, char** argv) {
     std::cout << "Hello World" << std::endl;
 
-    TFile *f = new TFile("test.root");
+    std::string fileName = argv[1];
+
+    TFile *f = new TFile(fileName.c_str());
     TTree *t = (TTree*)f->Get("TestIO");
     double darr[NUM][NUM];
     t->SetBranchAddress("darr", &darr);

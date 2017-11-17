@@ -11,7 +11,7 @@ isSnapshot := true
 scalaVersion := "2.11.8"
 
 spIgnoreProvided := true
-sparkVersion := "2.1.1"
+sparkVersion := "2.2.0"
 sparkComponents := Seq("sql")
 
 resolvers += Resolver.mavenLocal

@@ -2,3 +2,5 @@ bin/
 data/
 target/
 project/project/
+*.root
+*.bin

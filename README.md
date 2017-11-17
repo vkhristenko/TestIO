@@ -1,5 +1,10 @@
 # Testing ROOT I/O 
 
+## Machine
+- Macbook Pro 2.7GHz Intel Core i5
+- Memory 8GB 1867 MHz DDR3
+- Use 1GB for driver and executor for Spark.
+
 ## Generate ROOT file and analyze with ROOT
 - Assume ROOT is installed and `ROOTSYS` is set
 - Create a ROOT file with produce.cpp

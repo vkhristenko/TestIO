@@ -2,7 +2,7 @@
 #include <fstream>
 
 // define buffer size in bytes
-#define BUFFER_SIZE 100
+#define BUFFER_SIZE 1024 * 4
 
 // define the number of buffers to be written
 #define NUM_BUFFERS 1000 * 1000

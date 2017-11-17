@@ -4,19 +4,11 @@ object ReadBinary {
 
     // defs
     val fileName = "/Users/vk/software/TestIO/cc/bin/test_binary.bin"
-    val bufferSize = 100
+    val bufferSize = 1024 * 4
     val numBuffers = 1000 * 1000
-    val which = args(1).asInstanceOf[Int]
 
     // java.io
-    which match {
-      case 1 => javaio(fileName, bufferSize, numBuffers)
-      case 2 => randomacess(fileName, bufferSize, numBuffers)
-      case 3 => buffered(fileName, bufferSize, numBuffers)
-      case 4 => bytebuffer(fileName, bufferSize, numBuffers)
-      case 5 => memmapped(fileName, bufferSize, numBuffers)
-      case _ => ()
-    }
+      javaio(fileName, bufferSize, numBuffers) 
 
     println("Bye Bye World")
   }
@@ -26,8 +18,9 @@ object ReadBinary {
     val inputStream = new FileInputStream(fileName)
     val buffer = Array.fill[Byte](bufferSize)(0)
 
-    for (i <- 0 until numBuffers)
+    for (i <- 0 until numBuffers) {
       inputStream.read(buffer)
+    }
 
     inputStream.close
   }

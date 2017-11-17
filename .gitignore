@@ -4,3 +4,4 @@ target/
 project/project/
 *.root
 *.bin
+*.parquet

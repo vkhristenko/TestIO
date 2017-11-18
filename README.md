@@ -179,4 +179,20 @@ Time taken: 16284 ms
 res16: Double = 4.95E10
 ```
 
-- __Seems like that as soon as you try to explode/flatMap or anything that does the explosion of the Dataset[Seq[Double]] into Dataset[Double] blows up the execution time__
+- __Seems like that as soon as you try to explode/flatMap or anything that does the explosion of the `Dataset[Seq[Double]]` into `Dataset[Double]` blows up the execution time__
+
+- __What about just `count` of rows? The implementation will still read the binary data and we can test the spark's overhead__
+```
+For a clean session -> no caching!
+
+scala> import sp._
+import sp._
+
+scala> val df = spark.sqlContext.read.binary("file:/Users/vk/software/TestIo/cc/bin/test_2d_binary.bin")
+df: org.apache.spark.sql.DataFrame = [array: array<double>]
+
+scala> spark.time(df.count)
+Time taken: 9468 ms
+res0: Long = 50000
+```
+

@@ -1,13 +1,15 @@
-# Testing ROOT I/O 
+# Testing Apache Spark / ROOT / IO 
 
 ## Machine
 - Macbook Pro 2.7GHz Intel Core i5
 - Memory 8GB 1867 MHz DDR3
 - Use 1GB for driver and executor for Spark.
 
-## Data
+## Data/Setup
 - Next steps describe how to generate the data
 - For ROOT file, there is a file on lxplus already `/afs/cern.ch/work/v/vkhriste/public/data/TestIO/test.root`
+- Test consists of taking a 2D 100x100 matrix (or 10K vector) for each row and summing all of its elements.
+- Single Threaded (except for parquet) everything.
 
 ## Generate ROOT file and analyze with ROOT
 - Assume ROOT is installed and `ROOTSYS` is set
@@ -33,10 +35,13 @@ sys 0m0.469s
 ```
 - __The sum has been computed with just and a for loop over it:__
 ```
-t->GetEntry(i);
-for (auto ii=0; ii<NUM; ii++)
-    for (auto jj=0; jj<NUM; jj++)
-        totalSum += darr[ii][jj];
+double totalSum = 0;
+for (auto i=0; i<NUM_EVENTS; i++) {
+    t->GetEntry(i);
+    for (auto ii=0; ii<NUM; ii++)
+        for (auto jj=0; jj<NUM; jj++)
+            totalSum += darr[ii][jj];
+}
 ```
 
 ## Analyze the same file with Apache Spark
@@ -106,7 +111,7 @@ real    0m8.811s
 user    0m5.334s
 sys 0m2.623s
 ```
-- __Scala JVM produces a comparable result with cc/native__
+- __Scala JVM produces a comparable (factor of 2x) result with cc/native__
 - __So, let's create a simple Apache Spark Data Source__
 
 ## Spark Data for Binary 2D Array
@@ -202,4 +207,5 @@ res0: Long = 50000
 - __Is that worth trying to prepare an exploded dataset and test its performance???__
 - __Would it even make sense for ROOT workflows???__
 - __Where does the overhead comes from for Apache Spark???__
-- __Parquet I/O is supposed to be optimized, but still numbers do not allows interactive processing of 50K of rows of 2D matrices. Am I missing something here???__
+- __Parquet I/O is supposed to be optimized, but still numbers do not allow interactive processing of 50K of rows of 2D matrices. Am I missing something here???__
+- __Is that worth rewriting ROOT I/O for JVM(spark-root) given that parquet (supposed to be optimal out of the box) produces comparable results for a single threaded execution with the current implementation => not much to gain even if rewritten__

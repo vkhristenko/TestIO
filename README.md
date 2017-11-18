@@ -110,7 +110,7 @@ sys 0m2.623s
 - __So, let's create a simple Apache Spark Data Source__
 
 ## Spark Data for Binary 2D Array
-- `sp/src/main/scala/package` contains the implementation of a simple array reading from a binary file. 
+- `sp/src/main/scala/package.scala` contains the implementation of a simple array reading from a binary file. 
 - 1 read call per each row(array) -> __minimal reading overhead__
 - Reading part is quite simple
 ```
@@ -195,4 +195,11 @@ scala> spark.time(df.count)
 Time taken: 9468 ms
 res0: Long = 50000
 ```
+- __Comparable to reading JVM 2d binary data__
 
+## Some Conclusions/Thoughts
+- Avoid `flatMap/explosion`. __However this is not possible if you want to perform histogramming. Unless the data is stored exploded already.__
+- __Is that worth trying to prepare an exploded dataset and test its performance???__
+- __Would it even make sense for ROOT workflows???__
+- __Where does the overhead comes from for Apache Spark???__
+- __Parquet I/O is supposed to be optimized, but still numbers do not allows interactive processing of 50K of rows of 2D matrices. Am I missing something here???__

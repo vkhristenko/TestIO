@@ -1,5 +1,10 @@
 # Testing Apache Spark / ROOT / IO 
 
+## Structure
+- cc - c++ ROOT based processing
+- sj - Scala/Java - pure JVM stuff
+- sp - Apache Spark based processing 
+
 ## Machine
 - Macbook Pro 2.7GHz Intel Core i5
 - Memory 8GB 1867 MHz DDR3

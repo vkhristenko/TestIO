@@ -35,7 +35,7 @@ package sp {
       buffer.flip
       buffer.asDoubleBuffer.get(array)
       iRow+=1
-      Row(array)
+      Row(array.grouped(100).toArray)
     }
   }
 
@@ -61,7 +61,7 @@ package sp {
         files: Seq[FileStatus]): Option[StructType] = 
       Some(StructType(
         Nil 
-        :+ StructField("array", ArrayType(DoubleType))
+        :+ StructField("array", ArrayType(ArrayType(DoubleType)))
       ))
 
     override def buildReaderWithPartitionValues(

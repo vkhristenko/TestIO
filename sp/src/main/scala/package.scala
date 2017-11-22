@@ -42,7 +42,7 @@ package sp1d {
       buffer.flip
       buffer.asDoubleBuffer.get(array)
       iRow+=1
-      Row(array.grouped(100).toArray)
+      Row(array)
     }
   }
 
